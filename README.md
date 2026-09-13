@@ -1,12 +1,49 @@
-# Builder Pattern - Pet Adoption Shop
+# Pet Adoption System (Builder Pattern)
 
-## Project Description
-This project implements the Builder design pattern for a Pet Adoption Shop. It allows creating detailed pet profiles (Dog, Cat, etc.) step-by-step.
+## Description
+A simple Java application for creating pet adoption profiles with step-by-step validated construction.
 
-## Clean Code Principles
 
-1. Meaningful Names: Class and field names clearly express their intention (`PetBuilder`, `isVaccinated`).
-2. Single Responsibility Methods: Every setter in `PetBuilder` modifies only one property.
-3. Validation in build(): `PetBuilder` validates fields before object creation and throws an exception on bad data.
-4. No Magic Numbers: Constant `MAX_AGE_LIMIT` is used instead of a raw number `30`.
-5. Fluent Interface: Method chaining allows readable construction calls (`builder.setName().setSpecies().build()`).
+## Project Structure
+* Pet.java — Main domain class (immutable)
+* PetBuilder.java — Builder with validation rules
+* PetDirector.java — Director with predefined recipes
+* Main.java — Entry point with tests and exception handling
+
+
+
+## Clean Code Principles Applied
+
+### 1. Meaningful Names
+Self-explanatory variable names.
+* Before: `boolean v;`
+* After: `private boolean isVaccinated;`
+
+### 2. Small Methods
+Each builder setter modifies exactly one field.
+public PetBuilder setBreed(String breed) {
+    this.breed = breed;
+    return this;
+}
+
+
+### 3. Small, Focused Classes
+Each class has one responsibility: `Pet` only stores/prints data, `PetBuilder` only builds, `PetDirector` only holds recipes — no mixed logic.
+
+### 4. Validated Construction
+Prevents creating invalid instances in `build()`.
+public Pet build() {
+    if (name == null || name.trim().isEmpty()) {
+        throw new IllegalStateException("Pet name cannot be empty!");
+    }
+    if (ageYears < 0 || ageYears > MAX_AGE_LIMIT) {
+        throw new IllegalStateException("Invalid pet age: " + ageYears);
+    }
+    return new Pet(this);
+}
+
+
+### 5. No Magic Numbers
+Extracted raw values into constants.
+* Before: `if (ageYears > 30)`
+* After: `private static final int MAX_AGE_LIMIT = 30;`
