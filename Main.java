@@ -1,37 +1,42 @@
 public class Main {
+
+    public static void prepareStarterKit(AdoptionKitFactory kitFactory, String petName) {
+        System.out.println("\nPreparing starter kit for adoption...");
+        Pet pet = kitFactory.createPet(petName);
+        PetFood food = kitFactory.createFood();
+        PetToy toy = kitFactory.createToy();
+
+        System.out.println(pet);
+        food.eat();
+        toy.play();
+        System.out.println("Starter kit ready.");
+    }
+
     public static void main(String[] args) {
-        System.out.println("Pet Adoption Test\n");
+        System.out.println("=== 1. Testing Builder ===");
+        Pet korolevskaya = new PetBuilder()
+                .setName("Korolevskayasobaka")
+                .setSpecies("Dog")
+                .setBreed("Corgi")
+                .setGender("Male")
+                .setAgeYears(2)
+                .setVaccinated(true)
+                .setPassportReady(true)
+                .build();
+        System.out.println(korolevskaya);
 
-        PetBuilder b1 = new PetBuilder();
-        b1.setName("Korolevskayasobaka");
-        b1.setSpecies("Dog");
-        b1.setBreed("Corgi");
-        b1.setGender("Male");
-        b1.setAgeYears(2);
-        b1.setVaccinated(true);
-        b1.setPassportReady(true);
+        System.out.println("\n=== 2. Testing Factory Method ===");
+        PetFactory dogFactory = new DogFactory();
+        dogFactory.registerPet("Aktos");
 
-        Pet pet1 = b1.build();
-        System.out.println(pet1);
+        PetFactory catFactory = new CatFactory();
+        catFactory.registerPet("Whiskers");
 
-        PetDirector director = new PetDirector();
+        System.out.println("\n=== 3. Testing Abstract Factory ===");
+        AdoptionKitFactory dogKit = new DogAdoptionKitFactory();
+        prepareStarterKit(dogKit, "Pochita");
 
-        Pet puppy = director.makeStandardPuppy(new PetBuilder());
-        System.out.println(puppy);
-
-        Pet kitten = director.makeStrayKitten(new PetBuilder());
-        System.out.println(kitten);
-
-        try {
-            PetBuilder badBuilder = new PetBuilder();
-            badBuilder.setName("Ghost");
-            badBuilder.setSpecies("Dog");
-            badBuilder.setAgeYears(-5); // Ошибка
-            
-            Pet badPet = badBuilder.build();
-            System.out.println(badPet);
-        } catch (IllegalStateException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        AdoptionKitFactory catKit = new CatAdoptionKitFactory();
+        prepareStarterKit(catKit, "Luna");
     }
 }
