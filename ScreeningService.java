@@ -1,4 +1,3 @@
-/** Subsystem 1: checks that the applicant is allowed to adopt. */
 public class ScreeningService {
     private static final int MINIMUM_AGE = 18;
 
