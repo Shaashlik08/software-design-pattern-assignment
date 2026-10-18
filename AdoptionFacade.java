@@ -1,7 +1,3 @@
-/**
- * Facade: one simple method that runs the whole adoption process
- * in the correct order. The client does not know about the subsystems.
- */
 public class AdoptionFacade {
     private static final double ADOPTION_FEE = 50.0;
 
