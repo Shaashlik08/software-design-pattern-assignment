@@ -1,7 +1,5 @@
 import java.util.HashSet;
 import java.util.Set;
-
-/** Subsystem 3: checks the health of the animal. */
 public class VeterinaryService {
     private final Set<String> sickAnimals = new HashSet<>();
 
