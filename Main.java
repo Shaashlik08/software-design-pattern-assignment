@@ -1,4 +1,3 @@
-/** Client: uses only the AdoptionFacade. */
 public class Main {
     public static void main(String[] args) {
         AdoptionFacade adoption = new AdoptionFacade();
