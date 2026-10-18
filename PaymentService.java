@@ -1,4 +1,3 @@
-/** Subsystem 4: charges the adoption fee. */
 public class PaymentService {
     private static final double CARD_LIMIT = 100.0;
 
