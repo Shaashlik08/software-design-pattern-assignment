@@ -1,7 +1,5 @@
 import java.util.HashSet;
 import java.util.Set;
-
-/** Subsystem 2: tracks which animals are free, reserved or adopted. */
 public class InventoryService {
     private final Set<String> existingAnimals = new HashSet<>();
     private final Set<String> reservedAnimals = new HashSet<>();
